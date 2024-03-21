@@ -26,7 +26,6 @@ The script will receive a command to execute and 2 yaml files as input.
 ##########
 ## Processing
 
-https://komodor.com/blog/automating-kubernetes-deployments-with-github-actions/ # remove
 
 docker build  -t yaakovb/php-fpm-nginx:$(git rev-parse --short HEAD) .
 
@@ -51,8 +50,3 @@ kubectl create secret docker-registry regsecret \
 --docker-password=xxxxxxxxxxxxxxx \
 --docker-email=vlad.bronfman@gmail.com
 secret/regsecret created
-
-
-
-
-
