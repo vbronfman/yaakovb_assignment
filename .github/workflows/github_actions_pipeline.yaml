@@ -6,13 +6,13 @@ on:
   push: 
     branches:
       - develop
-  workflow_dispatch: # should be manual; workflow_dispatch is the keyword you need to run a GitHub Action on demand, without having to push or create a pull request
-    branches:
-      - main
+  # workflow_dispatch: # should be manual; workflow_dispatch is the keyword you need to run a GitHub Action on demand, without having to push or create a pull request
+  #   branches:
+  #     - main
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
-  DOCKER_IMAGE_NAME: yaakovb/php-fpm-nginx
+  DOCKER_IMAGE_NAME: php-fpm-nginx
   REGISTRY_URL: registry-1.docker.io
 
   DOCKERFILE_PATH: ./Dockerfile
@@ -57,9 +57,11 @@ jobs:
       - name: Build Docker Image
       #           docker build  -t yaakovb/php-fpm-nginx:$(git rev-parse --short HEAD) .
         run: |
-          docker build  -t $REGISTRY_URL/yaakovb/php-fpm-nginx .
+          docker build  -t $REPO/yaakovb/php-fpm-nginx .
         env:
-          REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
+          # REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
+          REPO: ${{ secrets.DOCKER_USER }}
+
 
 
       # Step 3: Upload image to Docker registry
@@ -77,9 +79,9 @@ jobs:
 
 
       - name: Push Docker Image
-        run: docker push $REGISTRY_URL/yaakovb/php-fpm-nginx
+        run: docker push $REPO/php-fpm-nginx
         env:
-          REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
+          REPO: ${{ secrets.DOCKER_USER }}
 
   # deploy-to-k8s:
   #   runs-on: ubuntu-latest
