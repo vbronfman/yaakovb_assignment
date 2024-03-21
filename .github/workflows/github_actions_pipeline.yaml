@@ -106,8 +106,8 @@ jobs:
      # Step 4: Deploy image to Kubernetes cluster. Due to time restricrtions stick with hardcoded image name
      # requires predefined k8s secret docker to pull image from private repo
       - name: Deploy to Kubernetes
-         run: |
-            kubectl apply -f manifests/deployment.yaml
+        run: |
+         kubectl apply -f manifests/deployment.yaml
 
 
   #     # Step 5: Get application service external IP
