@@ -14,6 +14,7 @@ env:
   REGISTRY: docker.io
   DOCKER_IMAGE_NAME: php-fpm-nginx
   REGISTRY_URL: registry-1.docker.io
+  REPO: vladbronfman
 
   DOCKERFILE_PATH: ./Dockerfile
 

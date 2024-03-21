@@ -26,6 +26,17 @@ The script will receive a command to execute and 2 yaml files as input.
 ##########
 ## Processing
 
+https://komodor.com/blog/automating-kubernetes-deployments-with-github-actions/ # remove
+
 docker build  -t yaakovb/php-fpm-nginx:$(git rev-parse --short HEAD) .
 
 docker run --rm --name yaakovb-app -p 58080:80 yaakovb/php-fpm-nginx:$(git rev-parse --short HEAD)
+
+created EKS with terraform 
+created profile github-eks
+
+aws eks update-kubeconfig --region <region> --name <cluster name> --profile  github-eks
+
+K8S_EKS_NAME eks-workshop
+
+ADD SECRETS AWS_ACCESS_KEY_ID AND AWS_SECRET_ACCESS_KEY
