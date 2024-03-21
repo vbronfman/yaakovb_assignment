@@ -6,7 +6,7 @@ on:
   #push: 
     branches:
       - develop
-  workflow_dispatch: #? should be manual
+  workflow_dispatch: # should be manual; workflow_dispatch is the keyword you need to run a GitHub Action on demand, without having to push or create a pull request
     branches:
       - main
 env:
@@ -66,7 +66,7 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          # REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
+          REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
         # with:
         #   registry: ghcr.io
         #   username: ${{ github.actor }}
