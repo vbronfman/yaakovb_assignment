@@ -5,15 +5,19 @@ on:
   pull_request:
   push: 
     branches:
-      - develop
-  workflow_dispatch: #? should be manual
+      - development
+  workflow_dispatch: # should be manual; workflow_dispatch is the keyword you need to run a GitHub Action on demand, without having to push or create a pull request
     branches:
       - main
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
-  DOCKER_IMAGE_NAME: yaakovb/php-fpm-nginx
+  DOCKER_IMAGE_NAME: php-fpm-nginx
   REGISTRY_URL: registry-1.docker.io
+  REPO: vladbronfman
+  IMAGE_TAG: "latest"
+  AWS_REGION: "us-east-1"
+  EKS_CLUSTER_NAME: "eks-workshop"
 
   DOCKERFILE_PATH: ./Dockerfile
 
@@ -57,26 +61,31 @@ jobs:
       - name: Build Docker Image
       #           docker build  -t yaakovb/php-fpm-nginx:$(git rev-parse --short HEAD) .
         run: |
-          docker build  -t yaakovb/php-fpm-nginx .
+          docker build  -t $REPO/php-fpm-nginx .
+        env:
+          # REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
+          REPO: ${{ secrets.DOCKER_USER }}
+
 
 
       # Step 3: Upload image to Docker registry
       - name: Login to Docker Registry
-        run: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin $REGISTRY_URL
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          # REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
-        # with:
-        #   registry: ghcr.io
-        #   username: ${{ github.actor }}
-        #   password: ${{ secrets.GITHUB_TOKEN }}
+        # run: echo $DOCKER_PASSWORD | docker login $REGISTRY_URL -u $DOCKER_USERNAME --password-stdin 
+        # env:
+        #   DOCKER_USERNAME: ${{ secrets.DOCKER_USER }}
+        #   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        #   REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
+        uses: docker/login-action@v3
+        with:
+          #registry: ${{ secrets.REGISTRY_URL }}
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
 
       - name: Push Docker Image
-        run: docker push $REGISTRY_URL/my-app:latest
+        run: docker push $REPO/php-fpm-nginx
         env:
-          REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
+          REPO: ${{ secrets.DOCKER_USER }}
 
   # deploy-to-k8s:
   #   runs-on: ubuntu-latest
@@ -84,11 +93,22 @@ jobs:
   #   steps:
   #     - name: Checkout Repository
   #       uses: actions/checkout@v2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{env.AWS_REGION}}
 
-  #     # Step 4: Deploy image to Kubernetes cluster
-  #     - name: Deploy to Kubernetes
-  #       run: |
-  #         # Commands to deploy image to Kubernetes cluster
+      - name: Update kube config
+        run: aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_REGION
+
+     # Step 4: Deploy image to Kubernetes cluster. Due to time restricrtions stick with hardcoded image name
+     # requires predefined k8s secret docker to pull image from private repo
+      - name: Deploy to Kubernetes
+        run: |
+         kubectl apply -f manifests/deployment.yaml
+
 
   #     # Step 5: Get application service external IP
   #     - name: Get Service External IP

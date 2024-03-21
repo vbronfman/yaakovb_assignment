@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-fpm-nginx-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php-fpm-nginx
+  template:
+    metadata:
+      labels:
+        app: php-fpm-nginx
+    spec:
+      containers:
+      - name: php-fpm-nginx-container
+        image: vladbronfman/php-fpm-nginx:latest
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+        - name: regsecret
