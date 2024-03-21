@@ -5,7 +5,7 @@ on:
   pull_request:
   push: 
     branches:
-      - develop
+      - development
   workflow_dispatch: # should be manual; workflow_dispatch is the keyword you need to run a GitHub Action on demand, without having to push or create a pull request
     branches:
       - main
@@ -57,7 +57,7 @@ jobs:
       - name: Build Docker Image
       #           docker build  -t yaakovb/php-fpm-nginx:$(git rev-parse --short HEAD) .
         run: |
-          docker build  -t $REPO/yaakovb/php-fpm-nginx .
+          docker build  -t $REPO/php-fpm-nginx .
         env:
           # REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
           REPO: ${{ secrets.DOCKER_USER }}
