@@ -37,6 +37,22 @@ created profile github-eks
 
 aws eks update-kubeconfig --region <region> --name <cluster name> --profile  github-eks
 
+_$ aws eks update-kubeconfig --region us-east-1 --name eks-workshop --profile github-eks_
+
 K8S_EKS_NAME eks-workshop
 
-ADD SECRETS AWS_ACCESS_KEY_ID AND AWS_SECRET_ACCESS_KEY
+ADD SECRETS AWS_ACCESS_KEY_ID AND AWS_SECRET_ACCESS_KEY 
+
+Create secret in EKS to store docker credentials:
+Manually:
+kubectl create secret docker-registry regsecret \
+--docker-server=docker.io \
+--docker-username=vladbronfman \
+--docker-password=xxxxxxxxxxxxxxx \
+--docker-email=vlad.bronfman@gmail.com
+secret/regsecret created
+
+
+
+
+
