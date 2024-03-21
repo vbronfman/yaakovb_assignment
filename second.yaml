@@ -1,0 +1,47 @@
+# YAML file 2
+name: Jane Smith
+age: 25
+city: Los Angeles
+is_student: true
+grades:
+  - subject: English
+    grade: A-
+  - subject: History
+    grade: B+
+address:
+  street: 456 Oak Ave
+  city: Smalltown
+  country: Canada
+contacts:
+  - name: John Doe
+    phone: 555-4321
+  - name: Sarah Brown
+    phone: 555-8765
+details:
+  hobbies:
+    - Swimming
+    - Painting
+  height: 160 cm
+  weight: 55 kg
+unique_key_data2: "Unique data in file 2"
+
+---
+# doc inline
+ doe: "a deer, a female deer"
+ ray: "a drop of golden sun"
+ pi: 3.14159
+ xmas: true
+ french-hens: 3
+ calling-birds:
+   - huey
+   - dewey
+   - louie
+   - fred
+ xmas-fifth-day:
+   calling-birds: four
+   french-hens: 3
+   golden-rings: 5
+   partridges:
+     count: 1
+     location: "a pear tree"
+   turtle-doves: two
