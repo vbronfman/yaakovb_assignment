@@ -57,7 +57,9 @@ jobs:
       - name: Build Docker Image
       #           docker build  -t yaakovb/php-fpm-nginx:$(git rev-parse --short HEAD) .
         run: |
-          docker build  -t yaakovb/php-fpm-nginx .
+          docker build  -t $REGISTRY_URL/yaakovb/php-fpm-nginx .
+        env:
+          REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
 
 
       # Step 3: Upload image to Docker registry
