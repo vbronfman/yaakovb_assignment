@@ -6,9 +6,9 @@ on:
   push: 
     branches:
       - develop
-  # workflow_dispatch: # should be manual; workflow_dispatch is the keyword you need to run a GitHub Action on demand, without having to push or create a pull request
-  #   branches:
-  #     - main
+  workflow_dispatch: # should be manual; workflow_dispatch is the keyword you need to run a GitHub Action on demand, without having to push or create a pull request
+    branches:
+      - main
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
