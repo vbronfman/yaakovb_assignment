@@ -54,6 +54,7 @@ https://nicwortel.nl/blog/2022/continuous-deployment-to-kubernetes-with-github-a
 ## Part II:
 Create a bash script that performs the following tasks using yq. Link to yq: HERE
 The script will receive a command to execute and 2 yaml files as input.
+>[!NOTE] The script must be generic for any two yaml files.
 Help()
 {
 # Display Help
@@ -81,3 +82,6 @@ echo
  common Extract the Common (key, value) pairs
  sort Sort the files by key
  
+## DISCLAIMER
+The request to manage all files is tough a little bit. There is plentry of edge cases with nested objects, multipart YAML manifests and so far. Sounds too optimistic try to address it within time given. 
+Be that as it may, the project employs test files are comprised of examples out of 'yq' site itself.
