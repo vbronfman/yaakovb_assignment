@@ -120,7 +120,7 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           REGISTRY_URL: "docker.io"
         run: |
-         kubectl kubectl create secret docker-registry regsecret \
+          kubectl create secret docker-registry regsecret \
            --docker-server=$REGISTRY_URL \
            --docker-username=$DOCKER_USERNAME \
            --docker-password=$DOCKER_PASSWORD \
