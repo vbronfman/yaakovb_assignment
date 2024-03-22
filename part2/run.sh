@@ -34,6 +34,8 @@ echo Running merge of ${files[*]} ...
 }
 
 
+
+
 get_args()
 {
     # exact 3 args ,
@@ -76,6 +78,26 @@ get_args()
   esac
 #done
 }
+
+
+unique(){
+# Extract the Unique keys along with their values
+
+} 
+
+common(){
+# Extract the Common (key, value) pairs
+
+} 
+
+sort(){
+# Sort the files by key
+
+} 
+
+
+}
+
 
 # Get input args
 get_args $@
