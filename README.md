@@ -54,3 +54,30 @@ https://nicwortel.nl/blog/2022/continuous-deployment-to-kubernetes-with-github-a
 ## Part II:
 Create a bash script that performs the following tasks using yq. Link to yq: HERE
 The script will receive a command to execute and 2 yaml files as input.
+Help()
+{
+# Display Help
+echo "Provide at least one argument"
+echo "Script options:"
+echo
+echo "Syntax: ./run.sh <option> <file1> <file2>"
+echo "options:"
+echo " merge Merge the files"
+echo " unique Extract the Unique keys along with their values"
+echo " common Extract the Common (key, value) pairs"
+echo " sort Sort the files by key"
+echo
+}
+
+>[!INFO]
+> $ ./run.sh
+> Provide at least one argument
+> Script options:
+>
+> Syntax: ./run.sh <option> <file1> <file2>
+> options:
+ merge Merge the files
+ unique Extract the Unique keys along with their values
+ common Extract the Common (key, value) pairs
+ sort Sort the files by key
+ 

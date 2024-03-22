@@ -45,6 +45,7 @@ jobs:
   #       run: |
   #         # Commands to create Kubernetes cluster 
             # eksctl create cluster --name eks-workshop --region us-east-1 --fargate  --profile github-eks  --zones us-east-1a,us-east-1b,us-east-1c
+            # took quite a while 2024-03-22 10:52:06  = 2024-03-22 11:08:09 [✔]  EKS cluster "eks-workshop" in "us-east-1" region is ready
 
   #     - name: Setup Private Docker Registry
   #       if: steps.check_k8s.outputs.exitcode == '1'
