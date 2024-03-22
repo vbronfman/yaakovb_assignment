@@ -122,9 +122,7 @@ Straigtforward approach to copy from product tutorials wasn's as successful.
 
 ### SORT
 
-Deeper plung into docs yield definit success. There is an *sort_by(.key)* example that grants the solution.
-
-Grabbed as is. 
+Deeper plunges into the documentation yield definite success. There is a *sort_by(.key)* example that provides the solution. Grabbed as is. 
 
 >[!WARN] the function uses '--inplace' flaf. In case of multidoc YAML it effectively mangles separate docs into one.
 
