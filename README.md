@@ -1,6 +1,8 @@
 # yaakovb_assignment
 home assignment Yaakov B
 
+## Description
+
 ## Part I:
 Create CI/CD workflow in GitHub Actions:
 
@@ -18,35 +20,37 @@ branch master the deploy is done by running the workflow manually.
 6. The workflow should output the application’s service external ip.
 Note: Make sure to hide sensitive data
 
+### Processing
 
-## Part II:
-Create a bash script that performs the following tasks using yq. Link to yq: HERE
-The script will receive a command to execute and 2 yaml files as input.
+The project employs preprovisioned EKS cluster
+Created EKS with terraform K8S_EKS_NAME = "eks-workshop"
 
-##########
-## Processing
+> [!NOTE]
+> _$ aws eks update-kubeconfig --region us-east-1 --name eks-workshop --profile github-eks_
 
 
-docker build  -t yaakovb/php-fpm-nginx:$(git rev-parse --short HEAD) .
-
-docker run --rm --name yaakovb-app -p 58080:80 yaakovb/php-fpm-nginx:$(git rev-parse --short HEAD)
-
-created EKS with terraform 
-created profile github-eks
-
-aws eks update-kubeconfig --region <region> --name <cluster name> --profile  github-eks
-
-_$ aws eks update-kubeconfig --region us-east-1 --name eks-workshop --profile github-eks_
-
-K8S_EKS_NAME eks-workshop
 
 ADD SECRETS AWS_ACCESS_KEY_ID AND AWS_SECRET_ACCESS_KEY 
 
 Create secret in EKS to store docker credentials:
-Manually:
+
+
 kubectl create secret docker-registry regsecret \
 --docker-server=docker.io \
 --docker-username=vladbronfman \
 --docker-password=xxxxxxxxxxxxxxx \
 --docker-email=vlad.bronfman@gmail.com
 secret/regsecret created
+
+### TODO
+1. The pipelines lakes test and validations
+2. There are hardcoded values.
+3. When considering the Kubernetes aspect, the pipeline lacks portability.
+4. The folders tree ill-structured
+
+### REFERENCES
+https://nicwortel.nl/blog/2022/continuous-deployment-to-kubernetes-with-github-actions 
+
+## Part II:
+Create a bash script that performs the following tasks using yq. Link to yq: HERE
+The script will receive a command to execute and 2 yaml files as input.
