@@ -128,12 +128,13 @@ jobs:
            --docker-server=$REGISTRY_URL \
            --docker-username=$DOCKER_USERNAME \
            --docker-password=$DOCKER_PASSWORD \
-           --docker-email=vlad.bronfman@gmail.com
+           --docker-email=vlad.bronfman@gmail.com \
+           --dry-run=client -o yaml | kubectl apply -f - 
       - name: Deploy to Kubernetes
         run: |
          kubectl apply -f ${GITHUB_WORKSPACE}/manifests/deployment.yaml ;
          echo $?;
-         # kubectl apply -f ${GITHUB_WORKSPACE}/manifests/service.yaml
+         kubectl apply -f ${GITHUB_WORKSPACE}/manifests/service.yaml
 
 
   #     # Step 5: Get application service external IP

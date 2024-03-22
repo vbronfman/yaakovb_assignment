@@ -86,7 +86,11 @@ echo
 The request to manage all files is tough a little bit. There is plentry of edge cases with nested objects, multipart YAML manifests and so far. Sounds too optimistic try to address it within time given. 
 Be that as it may, the project employs test files are comprised of examples out of 'yq' site itself.
 
+>[!NOTE] with all due to respect, I haven't work with yq yet. This is my very first experience. 
+
 >[!WARN] yq on git bash of Windows doesnt work as expected. yq 4.40.2 
+ yq eval-all --inplace 'select(fileIndex == 0) * select(fileIndex == 1)' 1.yml 2.yml 
+  yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' pod_nginx.yaml pod_busybox.yaml 
 
 yq r read from 
 Changing YAML values 
