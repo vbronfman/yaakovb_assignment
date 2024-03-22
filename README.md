@@ -27,7 +27,6 @@ Created EKS with terraform K8S_EKS_NAME = "eks-workshop"
 or
 Create with _eksctl create cluster --name eks-workshop --region us-east-1 --managed --profile github-eks_
 
-
 > [!NOTE]
 > _$ aws eks update-kubeconfig --region us-east-1 --name eks-workshop --profile github-eks_
 
