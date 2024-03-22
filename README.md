@@ -85,3 +85,12 @@ echo
 ## DISCLAIMER
 The request to manage all files is tough a little bit. There is plentry of edge cases with nested objects, multipart YAML manifests and so far. Sounds too optimistic try to address it within time given. 
 Be that as it may, the project employs test files are comprised of examples out of 'yq' site itself.
+
+>[!WARN] yq on git bash of Windows doesnt work as expected. yq 4.40.2 
+
+yq r read from 
+Changing YAML values 
+yq w pod.yaml "spec.containers[0].env[0].value" "postgres://prod:5432" 
+
+Merging YAML files 
+yq m --append pod.yaml envoy-pod.yaml
