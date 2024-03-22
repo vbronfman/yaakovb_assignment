@@ -149,10 +149,10 @@ jobs:
             echo "Application Service External IP: ${{ steps.get_external_ip.outputs.stdout }}"
 
 #     # Step : Clean resources. This step is proprietary for this case only. 
-      - name: Cleanup
-        id: final
-        if: always()
-        # Commands to get service external IP
-        run: |
-          kubectl delete secret,deploy,svc --all
-          
+      # - name: Cleanup
+      #   id: final
+      #   if: always()
+      #   # Commands to get service external IP
+      #   run: |
+      #     kubectl delete secret,deploy,svc --all
+

@@ -96,7 +96,6 @@ sort(){
 } 
 
 
-}
 
 
 # Get input args
