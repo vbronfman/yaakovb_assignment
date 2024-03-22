@@ -18,6 +18,7 @@ env:
   IMAGE_TAG: "latest"
   AWS_REGION: "us-east-1"
   EKS_CLUSTER_NAME: "eks-workshop"
+  APP_SERVICE_NAME: "php-fpm-nginx-elb"
 
   DOCKERFILE_PATH: ./Dockerfile
 
@@ -141,7 +142,7 @@ jobs:
         # Commands to get service external IP
         run: |
          # kubectl get svc php-fpm-nginx-deployment -o=jsonpath='{.status.loadBalancer.ingress[0].ip}'
-          kubectl get svc php-fpm-nginx-deployment -o=jsonpath='{.status.loadBalancer.ingress[0].ip}'
+          kubectl get svc ${APP_SERVICE_NAME} -o=jsonpath='{.status.loadBalancer.ingress[0]}'
   
       - name: Output External IP
         run: |
