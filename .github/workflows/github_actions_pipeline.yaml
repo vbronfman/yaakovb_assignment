@@ -143,11 +143,11 @@ jobs:
         # Commands to get service external IP
         run: |
          # kubectl get svc php-fpm-nginx-deployment -o=jsonpath='{.status.loadBalancer.ingress[0].ip}'
-          echo Address is $(kubectl get svc ${APP_SERVICE_NAME} -o=jsonpath='{.status.loadBalancer.ingress[0]}')
+          ipadd=$(kubectl get svc ${APP_SERVICE_NAME} -o=jsonpath='{.status.loadBalancer.ingress[0]}')
   
       - name: Output External IP
         run: |
-            echo "Application Service External IP: ${{ steps.get_external_ip.outputs.stdout }}"
+            echo "Application Service External IP: ${{ steps.get_external_ip.outputs.ipadd }}"
 
 #     # Step : Clean resources. This step is proprietary for this case only. 
       # - name: Cleanup
