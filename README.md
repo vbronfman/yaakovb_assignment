@@ -24,23 +24,30 @@ Note: Make sure to hide sensitive data
 
 The project employs preprovisioned EKS cluster
 Created EKS with terraform K8S_EKS_NAME = "eks-workshop"
+or
+Create with _eksctl create cluster --name eks-workshop --region us-east-1 --managed --profile github-eks_
+
 
 > [!NOTE]
 > _$ aws eks update-kubeconfig --region us-east-1 --name eks-workshop --profile github-eks_
 
+1. Create Github flow secrets for DOCKER_* credentials of private repo. 
+
+the project employs DockerHub
+
+2. Create Github flow secrets to store AWS_ACCESS_KEY_ID AND AWS_SECRET_ACCESS_KEY 
+
+Required due to use by AWS eksctl tool to get access into EKS
+
+3. 
 
 
-ADD SECRETS AWS_ACCESS_KEY_ID AND AWS_SECRET_ACCESS_KEY 
+>[!NOTE] External IP issue. 
+> The workflow prints FQN of service instead of IP. This is the issue of the EKS cluster itself. 
+> For reason unclear LoadBalancer service has no spec of external IP.
+> I've spent quite a while troubleshooting, including deploynig of numerous EKS, but with a little 
+> success. THe issue certainly workable but right now I'm running out of time.
 
-Create secret in EKS to store docker credentials:
-
-
-kubectl create secret docker-registry regsecret \
---docker-server=docker.io \
---docker-username=vladbronfman \
---docker-password=xxxxxxxxxxxxxxx \
---docker-email=vlad.bronfman@gmail.com
-secret/regsecret created
 
 ### TODO
 1. The pipelines lakes test and validations

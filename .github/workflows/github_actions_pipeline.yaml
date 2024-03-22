@@ -3,7 +3,7 @@ name: CI/CD Workflow
 
 on:
   pull_request:
-  push: 
+  # push: 
     branches:
       - development
   workflow_dispatch: # should be manual; workflow_dispatch is the keyword you need to run a GitHub Action on demand, without having to push or create a pull request
@@ -142,7 +142,7 @@ jobs:
          kubectl apply -f ${GITHUB_WORKSPACE}/manifests/service.yaml
 
 
-  #     # Step 5: Get application service external IP
+     # Step 5: Get application service external IP
       - name: Get Service External IP
         id: get_external_ip
         # Commands to get service external IP ; >> $GITHUB_OUTPUT ?
@@ -155,7 +155,7 @@ jobs:
             echo "Application Service External IP: ${{ steps.get_external_ip.outputs.ipadd }}"
 
       - name: Adding markdown
-        run: echo '### ${{ steps.get_external_ip.outputs.ipadd }} 🚀' ${{ steps.get_external_ip.outputs.ipadd }} >> $GITHUB_STEP_SUMMARY            
+        run: echo '### ${{ steps.get_external_ip.outputs.ipadd }} 🚀' >> $GITHUB_STEP_SUMMARY            
 
 #     # Step : Clean resources. This step is proprietary for this case only. 
       # - name: Cleanup
