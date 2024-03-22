@@ -1,6 +1,6 @@
 # Draft 
 name: CI/CD Workflow
-
+description: "home assignment task"
 on:
   pull_request:
   push: 
@@ -9,6 +9,11 @@ on:
   workflow_dispatch: # should be manual; workflow_dispatch is the keyword you need to run a GitHub Action on demand, without having to push or create a pull request
     branches:
       - main
+outputs:
+  service-IP:
+    description: "k8s service port number"
+    # value: ${{ steps.random-number-generator.outputs.random-number }}
+    value: ${{ steps.get_external_ip.outputs.ipadd }}    
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
@@ -140,10 +145,10 @@ jobs:
   #     # Step 5: Get application service external IP
       - name: Get Service External IP
         id: get_external_ip
-        # Commands to get service external IP
+        # Commands to get service external IP ; >> $GITHUB_OUTPUT ?
         run: |
          # kubectl get svc php-fpm-nginx-deployment -o=jsonpath='{.status.loadBalancer.ingress[0].ip}'
-          ipadd=$(kubectl get svc ${APP_SERVICE_NAME} -o=jsonpath='{.status.loadBalancer.ingress[0]}')
+         echo "ipadd=$(kubectl get svc ${APP_SERVICE_NAME} -o=jsonpath='{.status.loadBalancer.ingress[0]}')" >> $GITHUB_OUTPUT
   
       - name: Output External IP
         run: |
