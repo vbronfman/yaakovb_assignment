@@ -154,6 +154,9 @@ jobs:
         run: |
             echo "Application Service External IP: ${{ steps.get_external_ip.outputs.ipadd }}"
 
+      - name: Adding markdown
+        run: echo '### ${{ steps.get_external_ip.outputs.ipadd }}" 🚀' ${{ steps.get_external_ip.outputs.ipadd }}" >> $GITHUB_STEP_SUMMARY            
+
 #     # Step : Clean resources. This step is proprietary for this case only. 
       # - name: Cleanup
       #   id: final
