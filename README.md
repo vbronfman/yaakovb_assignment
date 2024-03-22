@@ -113,6 +113,3 @@ yq w pod.yaml "spec.containers[0].env[0].value" "postgres://prod:5432"
 Merging YAML files 
 yq m --append pod.yaml envoy-pod.yaml
 
-------
-
-
