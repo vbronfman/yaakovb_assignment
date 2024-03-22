@@ -17,6 +17,7 @@ Create CI/CD workflow in GitHub Actions:
 
 5. For branch develop, the deploy is done automatically on pull request while for
 branch master the deploy is done by running the workflow manually.
+
 6. The workflow should output the application’s service external ip.
 Note: Make sure to hide sensitive data
 
