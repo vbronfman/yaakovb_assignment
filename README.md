@@ -17,6 +17,7 @@ Create CI/CD workflow in GitHub Actions:
 
 5. For branch develop, the deploy is done automatically on pull request while for
 branch master the deploy is done by running the workflow manually.
+
 6. The workflow should output the application’s service external ip.
 Note: Make sure to hide sensitive data
 
@@ -26,7 +27,6 @@ The project employs preprovisioned EKS cluster
 Created EKS with terraform K8S_EKS_NAME = "eks-workshop"
 or
 Create with _eksctl create cluster --name eks-workshop --region us-east-1 --managed --profile github-eks_
-
 
 > [!NOTE]
 > _$ aws eks update-kubeconfig --region us-east-1 --name eks-workshop --profile github-eks_
@@ -115,4 +115,3 @@ yq w pod.yaml "spec.containers[0].env[0].value" "postgres://prod:5432"
 Merging YAML files 
 yq m --append pod.yaml envoy-pod.yaml
 
-------
