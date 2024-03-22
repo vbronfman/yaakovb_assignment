@@ -93,18 +93,17 @@ echo
 ```
 ## PROCESSING
 1. Developed bash script:
-> [!TIP]
-> $ ./run.sh
-> Provide at least one argument
-> Script options:
->
-> Syntax: ./run.sh <option> <file1> <file2>
-> options:
+```
+$ ./run.sh
+Provide at least one argument
+Script options:
+Syntax: ./run.sh <option> <file1> <file2>
+ options:
  merge Merge the files
  unique Extract the Unique keys along with their values
  common Extract the Common (key, value) pairs
  sort Sort the files by key
- 
+``` 
 2. Addressing the objectives: 
 
 ## DISCLAIMER
