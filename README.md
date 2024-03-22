@@ -56,6 +56,8 @@ There are certain putfalls I didn't manage to overcome within time given.
 > The Pull request created in a GitHub action does not trigger workflows with pull_request trigger
 > The flow is triggered by "push" event like a charm.
 
+PS J:\Develop\YaakovB_addignment> gh pr create -a "@me" --base development  --title "Merge to develop branch" --body "Trying to trigger flow" 
+
 ### TODO
 1. The pipelines lakes test and validations
 2. There are hardcoded values.
