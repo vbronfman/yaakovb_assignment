@@ -114,6 +114,7 @@ jobs:
         run: aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_REGION
 
      # Step 4: Deploy image to Kubernetes cluster. Due to time restricrtions stick with hardcoded image name
+     # have to add validation if the secret exists
       - name: Create a Kubernetes secret for use with a Docker registry (private repo)
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USER }}
@@ -127,9 +128,9 @@ jobs:
            --docker-email=vlad.bronfman@gmail.com
       - name: Deploy to Kubernetes
         run: |
-         kubectl apply -f ./manifests/deployment.yaml ;
+         kubectl apply -f ${GITHUB_WORKSPACE}/manifests/deployment.yaml ;
          echo $?;
-         # kubectl apply -f ./manifests/service.yaml
+         # kubectl apply -f ${GITHUB_WORKSPACE}/manifests/service.yaml
 
 
   #     # Step 5: Get application service external IP
