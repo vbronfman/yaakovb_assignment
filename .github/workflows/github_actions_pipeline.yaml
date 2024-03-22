@@ -127,9 +127,9 @@ jobs:
            --docker-email=vlad.bronfman@gmail.com
       - name: Deploy to Kubernetes
         run: |
-         kubectl apply -f manifests/deployment.yaml ;
+         kubectl apply -f ./manifests/deployment.yaml ;
          echo $?;
-         # kubectl apply -f manifests/service.yaml
+         # kubectl apply -f ./manifests/service.yaml
 
 
   #     # Step 5: Get application service external IP
