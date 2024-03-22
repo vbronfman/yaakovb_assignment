@@ -136,11 +136,13 @@ jobs:
 
 
   #     # Step 5: Get application service external IP
-  #     - name: Get Service External IP
-  #       run: |
-  #         # Commands to get service external IP
-  #         # Example: kubectl get svc my-app -o=jsonpath='{.status.loadBalancer.ingress[0].ip}'
-  #       id: get_external_ip
-
-  #     - name: Output External IP
-  #       run: echo "Application Service External IP: ${{ steps.get_external_ip.outputs.stdout }}"
+      - name: Get Service External IP
+        id: get_external_ip
+        # Commands to get service external IP
+        run: |
+         # kubectl get svc php-fpm-nginx-deployment -o=jsonpath='{.status.loadBalancer.ingress[0].ip}'
+          kubectl get svc php-fpm-nginx-deployment -o=jsonpath='{.status.loadBalancer.ingress[0].ip}'
+  
+      - name: Output External IP
+        run: |
+            echo "Application Service External IP: ${{ steps.get_external_ip.outputs.stdout }}"
