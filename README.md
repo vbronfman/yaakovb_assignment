@@ -41,6 +41,9 @@ Required due to use by AWS eksctl tool to get access into EKS
 
 3. 
 
+## DISCLAIMER
+I lake recent experience with Github Actions. It took me quite a while to search and learn.
+There are certain putfalls I didn't manage to overcome within time given.
 
 >[!NOTE] External IP issue. 
 > The workflow prints FQN of service instead of IP. This is the issue of the EKS cluster itself. 
@@ -48,6 +51,10 @@ Required due to use by AWS eksctl tool to get access into EKS
 > I've spent quite a while troubleshooting, including deploynig of numerous EKS, but with a little 
 > success. THe issue certainly workable but right now I'm running out of time.
 
+>[!NOTE]  there is an issue to trigger 'development' on pull_request.
+> https://github.com/orgs/community/discussions/65321#discussioncomment-6852334 
+> The Pull request created in a GitHub action does not trigger workflows with pull_request trigger
+> The flow is triggered by "push" event like a charm.
 
 ### TODO
 1. The pipelines lakes test and validations
@@ -105,4 +112,4 @@ yq w pod.yaml "spec.containers[0].env[0].value" "postgres://prod:5432"
 
 Merging YAML files 
 yq m --append pod.yaml envoy-pod.yaml
----
+
