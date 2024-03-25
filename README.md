@@ -1,4 +1,4 @@
-# yaakovb_assignment
+# Yaakovb_assignment
 home assignment Yaakov B
 
 ## Description
@@ -42,17 +42,16 @@ Required due to use by AWS eksctl tool to get access into EKS
 3. 
 
 ## DISCLAIMER
-I lake recent experience with Github Actions. It took me quite a while to search and learn.
-There are certain putfalls I didn't manage to overcome within time given.
+I lake recent experience with Github Actions. It took me quite a while to search and learn. There are certain putfalls I didn't manage to overcome within time given.
 
->[!NOTE] External IP issue. 
+> [!NOTE] External IP issue. 
 > The workflow prints FQN of service instead of IP. This is the issue of the EKS cluster itself.
 > THere is the topic refers the issue: https://github.com/eksctl-io/eksctl/issues/1640 
 > For reason unclear LoadBalancer service has no spec of external IP.
 > I've spent quite a while troubleshooting, including deploynig of numerous EKS, but with a little 
 > success. THe issue certainly workable but right now I'm running out of time.
 
->[!NOTE]  there is an issue to trigger 'development' on pull_request.
+> [!NOTE]  there is an issue to trigger 'development' on pull_request.
 > https://github.com/orgs/community/discussions/65321#discussioncomment-6852334 
 > The Pull request created in a GitHub action does not trigger workflows with pull_request trigger
 > The flow is triggered by "push" event like a charm.
@@ -75,7 +74,8 @@ https://komodor.com/blog/automating-kubernetes-deployments-with-github-actions/
 ## Part II:
 Create a bash script that performs the following tasks using yq. Link to yq: HERE
 The script will receive a command to execute and 2 yaml files as input.
->[!NOTE] The script must be generic for any two yaml files.
+The script must be generic for __any two yaml__ files.
+```
 Help()
 {
 ### Display Help
@@ -90,52 +90,41 @@ echo " common Extract the Common (key, value) pairs"
 echo " sort Sort the files by key"
 echo
 }
-
+```
 ## PROCESSING
-1. Developed bash script
-
->[!INFO]
-> $ ./run.sh
-> Provide at least one argument
-> Script options:
->
-> Syntax: ./run.sh <option> <file1> <file2>
-> options:
+1. Developed bash script:
+```
+$ ./run.sh
+Provide at least one argument
+Script options:
+Syntax: ./run.sh <option> <file1> <file2>
+ options:
  merge Merge the files
  unique Extract the Unique keys along with their values
  common Extract the Common (key, value) pairs
  sort Sort the files by key
- 
-2. Addressing of assignments.
+``` 
+2. Addressing the objectives: 
 
 ## DISCLAIMER
-Author's background with 'yq' is next to nothing. Be that as it may, the challenge excepted and
-
-attempt try and learn as much as possible in zero time. 
-
-Straigtforward approach to copy from product tutorials wasn's as successful. 
-
->[!ERROR] example https://mikefarah.gitbook.io/yq/recipes#export-as-environment-variables-script-or-any-custom-format doesn't work on pod manifest
-> $ yq '.. |(( select(kind == "scalar" and parent | kind != "seq") | (path | join("_")) + "='\''" > + . + "'\''"),( select(kind == "seq") | (path | join("_")) + "=(" + (map("'\''" + . + "'\''") | join(",")) + ")"))> ' pod_busybox.yaml
-> Error: !!str () cannot be added to a !!map (spec.containers[0])
-
+The author's background with 'yq' is next to nothing. Be that as it may, the challenge is accepted, and attempts are made to try and learn as much as possible in zero time.
+Straigtforward approach to copy from product tutorials wasn's as successful:  example https://mikefarah.gitbook.io/yq/recipes#export-as-environment-variables-script-or-any-custom-format doesn't work on pod manifest
+```
+$ yq '.. |(( select(kind == "scalar" and parent | kind != "seq") | (path | join("_")) + "='\''" > + . + "'\''"),( select(kind == "seq") | (path | join("_")) + "=(" + (map("'\''" + . + "'\''") | join(",")) + ")"))> ' pod_busybox.yaml
+Error: !!str () cannot be added to a !!map (spec.containers[0])
+```
 
 ### SORT
+Deeper plunges into the documentation yield definite success. There is a *sort_by(.key)* example that provides the solution. Grabbed as is. 
 
-Deeper plung into docs yield definit success. There is an *sort_by(.key)* example that grants the solution.
-
-Grabbed as is. 
-
->[!WARN] the function uses '--inplace' flaf. In case of multidoc YAML it effectively mangles separate docs into one.
+> [!IMPORTANT] the function uses '--inplace' flag. In case of multidoc YAML it effectively mangles separate docs into one.
 
 ### MERGE
-
 Same comes to merge: borrowed as is with hope it works.
 
 
-### Common
-
-I suggest to meet a half way and going to assign a stopgap solution. 
+### COMMON
+I suggest to meet a half way and going to assign a stopgap solution. It serves the purpose in certain extent.
 
 __common()__ function uses __yq__ to transmutate content of YAML files into strings that represent full key and value pairs:
 
@@ -149,8 +138,7 @@ spec.containers.0.args.0 = sh
 
 Then populates into assosiative arrays per file. Afterwards scripr runs over first array, test if there is same key in the second and print it out if positive.
 
-### Unique
-
+### UNIQUE
 A stop-gap - see [Common](#common)
 
 ## TODO
