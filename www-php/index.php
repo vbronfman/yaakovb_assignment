@@ -4,6 +4,6 @@
         <title>PHP Test home assignment</title>
     </head>
     <body>
-        <?php echo '<p>Hello World</p>'; phpinfo(); ?>
+        <?php echo '<p>Hello another World Yaakov </p>'; phpinfo(); ?>
     </body>
 </html>
