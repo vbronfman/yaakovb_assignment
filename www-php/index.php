@@ -4,6 +4,8 @@
         <title>PHP Test home assignment</title>
     </head>
     <body>
-        <?php echo '<p>Hello World</p>'; phpinfo(); ?>
+        <?php echo '<p>Hello World</p>'; 
+        echo "The time is " . date("h:i:sa");
+        phpinfo(); ?>
     </body>
 </html>
